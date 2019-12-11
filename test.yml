@@ -4,8 +4,6 @@
     - role: '{{ playbook_dir }}'
       gitlab_runner_activate: False
       gitlab_runner_reregister:
-        unregister_all: True
-        register_all: True
         gitlab_url: https://git.example.com
         registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
         runners:
