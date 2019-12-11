@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# first unregister all of the runners
+{{ gitlab_runner_link }} unregister --all-runners
+
+# re-register those runners...
+{% if 'runners' in gitlab_runner_reregister %}
+{% for r in gitlab_runner_reregister.runners %}
+{{ gitlab_runner_link }} \
+  register -n \
+  --url={{ gitlab_runner_reregister.gitlab_url }} \
+  --registration-token={{ gitlab_runner_reregister.registration_token }} \
+  --limit={% if 'limit' in r %}{{ r.limit }}{% else %}{{ gitlab_runner_concurrent_runners_per_host | default(0) }}{% endif %} \
+  --locked={% if 'locked' in r %}{{ r.locked }}{% else %}false{% endif %} \
+{% if 'env' in r %}{% for k, v in r.env.items() %}  --env {{ k }}={{ v }} \
+{% endfor %}{% endif %}
+{% if 'docker_image' in r %}  --docker-image={{ r.docker_image }} \
+{% endif -%}
+{% if 'docker_privileged' in r and r.docker_privileged %}  --docker-privileged \
+{% endif %}
+{% if 'docker_volumes' in r %}{% for v in r.docker_volumes %}  --docker-volumes={{ v }} \
+{% endfor %}{% endif %}
+  --tag-list={{ r.tags | join(",") }} \
+  --executor={{ r.executor }}
+
+{% endfor %}
+{% endif %}

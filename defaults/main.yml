@@ -33,6 +33,32 @@ gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 gitlab_runner_activate: True
 
+# the below will trigger a clearn and re-registration of all runners...
+#gitlab_runner_reregister:
+#  gitlab_url: https://git.example.com
+#  registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
+#  runners:
+#    - tags:
+#        - shell
+#      executor: shell
+#      limit: 1
+#    - tags:
+#        - docker
+#      executor: docker
+#      docker_image: ruby:2.1
+#      env:
+#        SECRET_NUMBER: 42
+#    - tags:
+#        - dnd
+#      executor: docker
+#      docker_image: docker:stable
+#      docker_privileged: yes
+#      docker_volumes:
+#        - /certs/client
+#        - /cache
+#      env:
+#        SECRET_NUMBER: 44
+
 gitlab_runner_checksums:
   '12.5.0':
     # https://gitlab-runner-downloads.s3.amazonaws.com/v12.5.0/binaries/gitlab-runner-linux-amd64
