@@ -1,0 +1,16 @@
+[Unit]
+Description=GitLab Runner
+After=syslog.target network.target
+ConditionFileIsExecutable={{ gitlab_runner_link }}
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+EnvironmentFile={{ gitlab_runner_config_dir }}/{{ gitlab_runner_env_file }}
+ExecStart={{ gitlab_runner_link }} $GITLAB_RUNNER_ARGS
+
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

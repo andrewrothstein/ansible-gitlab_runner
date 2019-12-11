@@ -1,0 +1,2 @@
+concurrent = {{ gitlab_runner_concurrent_runners_per_host | default(1) }}
+check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}

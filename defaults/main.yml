@@ -1,0 +1,43 @@
+---
+# defaults file for gitlab_runner
+
+# https://docs.gitlab.com/runner/install/linux-manually.html#install-1
+
+gitlab_runner_ver: 12.5.0
+
+gitlab_runner_os: linux
+gitlab_runner_arch: amd64
+
+gitlab_runner_install_dir: /usr/local/bin
+
+gitlab_runner_config_dir: /etc/gitlab-runner
+
+# EnvironmentFile for systemd service
+gitlab_runner_env_file: gitlab-runner.env
+
+# gitlab_runner main configuration file
+gitlab_runner_config_file: config.toml
+
+# process supervisor runs as...
+gitlab_runner_runas: gitlab-runner
+
+gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
+
+# add the gitlab_runner_runas to the following additional groups
+#gitlab_runner_addl_groups:
+#  - docker
+
+#gitlab_runner_concurrent_runners_per_host: 1
+
+#gitlab_runner_check_gitlab_new_builds_interval: 0
+
+gitlab_runner_activate: True
+
+gitlab_runner_checksums:
+  '12.5.0':
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v12.5.0/binaries/gitlab-runner-linux-amd64
+    linux-amd64: sha256:c196050b6908e4acc4e2c5deb348ed6cf425381f214e7a562bd72831999fd857
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v12.5.0/binaries/gitlab-runner-linux-386
+    linux-386: sha256:de3b82f33a5840ee895803192cc5f27d9c6e82eab59e53e5b6d12b5682cec825
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v12.5.0/binaries/gitlab-runner-linux-arm
+    linux-arm: sha256:bac73dae5893acdea9359c2ecbfcc3292250a5adca1a00fa1fd34b0f49b4d74a

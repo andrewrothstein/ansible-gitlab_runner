@@ -1,0 +1,48 @@
+---
+- name: resolve platform specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- name: look for executable
+  become: yes
+  stat:
+    path: '{{ gitlab_runner_lexe }}'
+  changed_when: False
+  register: gitlab_runner_register
+- when: not gitlab_runner_register.stat.exists
+  block:
+    - name: download
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{ gitlab_runner_url }}'
+        dest: '{{ gitlab_runner_lexe }}'
+        mode: 0755
+- name: link
+  become: yes
+  become_user: root
+  file:
+    src: '{{ gitlab_runner_lexe }}'
+    dest: '{{ gitlab_runner_link }}'
+    state: link
+
+- name: configure gitlab-runner
+  include: configure.yml
+
+- name: configure gitlab-runner supervisor
+  include_tasks: '{{ gitlab_runner_init | default("systemd") }}.yml'
+
+- name: start gitlab-runner
+  become: yes
+  become_user: root
+  when: gitlab_runner_activate
+  service:
+    name: gitlab-runner
+    state: started
+    enabled: yes

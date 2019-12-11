@@ -1,0 +1,47 @@
+---
+- name: add the gitlab-runner user to other groups
+  become: yes
+  become_user: root
+  user:
+    name: '{{ gitlab_runner_runas }}'
+    append: yes
+    groups: '{{ gitlab_runner_addl_groups | default([]) }}'
+
+- name: mkdir config and env directories
+  become: yes
+  become_user: root
+  with_items:
+    - d: '{{ gitlab_runner_config_dir }}'
+      m: '0600'
+  file:
+    state: directory
+    path: '{{ item.d }}'
+    mode: '{{ item.m }}'
+
+- name: templatize environment...
+  become: yes
+  become_user: root
+  notify: gitlab_runner_service_restart
+  with_items:
+    - t: gitlab-runner.env.j2
+      d: '{{ gitlab_runner_config_dir }}'
+      f: '{{ gitlab_runner_env_file }}'
+      m: '0644'
+  template:
+    src: '{{ item.t }}'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
+
+- name: templatize config.toml
+  become: yes
+  become_user: root
+  notify: gitlab_runner_service_restart
+  with_items:
+    - t: config.toml.j2
+      d: '{{ gitlab_runner_config_dir }}'
+      f: '{{ gitlab_runner_config_file }}'
+      m: '0600'
+  template:
+    src: '{{ item.t }}'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'

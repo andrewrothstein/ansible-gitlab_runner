@@ -1,0 +1,15 @@
+---
+- name: install gitlab-runner systemd service
+  become: yes
+  become_user: root
+  notify:
+    - gitlab_runner_daemon_reload
+    - gitlab_runner_service_restart
+  with_items:
+    - d: /etc/systemd/system
+      f: gitlab-runner.service
+      m: '0644'
+  template:
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
