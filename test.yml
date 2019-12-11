@@ -4,7 +4,7 @@
     - role: '{{ playbook_dir }}'
       gitlab_runner_activate: False
       gitlab_runner_reregister:
-        gitlab_url: https://git.example.com
+        gitlab_hostname: git.example.com
         registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
         runners:
           - tags:

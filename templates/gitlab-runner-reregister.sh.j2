@@ -8,7 +8,7 @@
 {% for r in gitlab_runner_reregister.runners %}
 {{ gitlab_runner_link }} \
   register -n \
-  --url={{ gitlab_runner_reregister.gitlab_url }} \
+  --url=https://{{ gitlab_runner_reregister.gitlab_hostname }} \
   --registration-token={{ gitlab_runner_reregister.registration_token }} \
   --limit={% if 'limit' in r %}{{ r.limit }}{% else %}{{ gitlab_runner_concurrent_runners_per_host | default(0) }}{% endif %} \
   --locked={% if 'locked' in r %}{{ r.locked }}{% else %}false{% endif %} \
