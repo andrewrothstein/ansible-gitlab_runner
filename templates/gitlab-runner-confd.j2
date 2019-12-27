@@ -1,0 +1,1 @@
+GITLAB_RUNNER_ARGS="run --working-directory /home/{{ gitlab_runner_runas }} --config {{ gitlab_runner_config_dir }}/{{ gitlab_runner_config_file }} --service gitlab-runner --user {{ gitlab_runner_runas }} --syslog"

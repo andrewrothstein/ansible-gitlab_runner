@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+
+name=gitlab-runner
+supervisor=supervisor-daemon
+command="{{ gitlab_runner_link }}"
+command_args=" $GITLAB_RUNNER_ARGS"
+command_background=true
+
+depend() {
+    need net
+}
