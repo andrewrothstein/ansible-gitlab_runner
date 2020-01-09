@@ -33,7 +33,7 @@ gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 gitlab_runner_activate: True
 
-# the below will trigger a clearn and re-registration of all runners...
+# the below will trigger a de-register/re-register of all runners...
 #gitlab_runner_reregister:
 #  gitlab_hostname: git.example.com
 #  registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
