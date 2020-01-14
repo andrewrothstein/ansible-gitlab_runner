@@ -11,6 +11,3 @@
   become_user: root
   when: gitlab_runner_activate
   command: '{{ gitlab_runner_reregister_sh }}'
-
-
-
