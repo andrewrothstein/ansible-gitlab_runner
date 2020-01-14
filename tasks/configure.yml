@@ -32,16 +32,15 @@
     dest: '{{ item.d }}/{{ item.f }}'
     mode: '{{ item.m }}'
 
-- name: templatize config.toml
+- name: establish global configs in config.toml
   become: yes
   become_user: root
   notify: gitlab_runner_service_restart
-  with_items:
-    - t: config.toml.j2
-      d: '{{ gitlab_runner_config_dir }}'
-      f: '{{ gitlab_runner_config_file }}'
-      m: '0600'
-  template:
-    src: '{{ item.t }}'
-    dest: '{{ item.d }}/{{ item.f }}'
-    mode: '{{ item.m }}'
+  blockinfile:
+    path: '{{ gitlab_runner_config_dir }}/{{ gitlab_runner_config_file }}'
+    create: yes
+    mode: '0600'
+    insertbefore: BOF
+    block: |
+      concurrent = {{ gitlab_runner_concurrent_runners_per_host | default(1) }}
+      check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}
