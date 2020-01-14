@@ -36,11 +36,14 @@
   become: yes
   become_user: root
   notify: gitlab_runner_service_restart
-  blockinfile:
+  with_items:
+    - regex: '^concurrent'
+      line: 'concurrent = {{ gitlab_runner_concurrent_runners_per_host | default(1) }}'
+    - regex: '^check_interval'
+      line: 'check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}'
+  lineinfile:
     path: '{{ gitlab_runner_config_dir }}/{{ gitlab_runner_config_file }}'
     create: yes
     mode: '0600'
-    insertbefore: BOF
-    block: |
-      concurrent = {{ gitlab_runner_concurrent_runners_per_host | default(1) }}
-      check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}
+    regex: '{{ item.regex }}'
+    line: '{{ item.line }}'
