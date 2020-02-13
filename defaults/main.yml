@@ -52,6 +52,7 @@ gitlab_runner_activate: True
 #        - dnd
 #      executor: docker
 #      docker_image: docker:stable
+#      docker_wait_for_services_timeout: 600
 #      docker_privileged: yes
 #      docker_volumes:
 #        - /certs/client

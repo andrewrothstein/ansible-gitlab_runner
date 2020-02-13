@@ -16,6 +16,8 @@
 {% endfor %}{% endif %}
 {% if 'docker_image' in r %}  --docker-image={{ r.docker_image }} \
 {% endif -%}
+{% if 'docker_wait_for_services_timeout' in r %}  --docker-wait-for-services-timeout={{ r.docker_wait_for_services_timeout }} \
+{% endif -%}
 {% if 'docker_privileged' in r and r.docker_privileged %}  --docker-privileged \
 {% endif %}
 {% if 'docker_volumes' in r %}{% for v in r.docker_volumes %}  --docker-volumes={{ v }} \
