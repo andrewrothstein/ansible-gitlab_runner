@@ -30,4 +30,4 @@ dlver () {
     dl $ver linux arm
 }
 
-dlver ${1:-12.7.1}
+dlver ${1:-12.8.0}
