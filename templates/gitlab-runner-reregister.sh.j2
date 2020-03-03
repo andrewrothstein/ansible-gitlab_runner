@@ -31,7 +31,7 @@
 {% if 'bucket_name' in r.cache_shared.s3 %} --cache-s3-bucket-name={{ r.cache_shared.s3.bucket_name }}{% endif %} \
 {% if 'bucket_location' in r.cache_shared.s3 %} --cache-s3-bucket-location={{ r.cache_shared.s3.bucket_location }}{% endif %} \
 {% if 'insecure' in r.cache_shared.s3 and r.cache_shared.s3.insecure | to_bool %} --cache-s3-insecure{% endif %} \
-{% elsif 'gcs' in r.cache_shared -%}
+{% elif 'gcs' in r.cache_shared -%}
 {% if 'access_id' in r.cache_shared.gcs %} --cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
 {% if 'private_key' in r.cache_shared.gcs %} --cache-gcs-private-key={{ r.cache_shared.gcs.private_key }}{% endif %} \
 {% if 'credentials_file' in r.cache_shared.gcs %} --cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
