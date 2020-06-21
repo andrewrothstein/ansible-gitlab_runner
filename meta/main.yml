@@ -10,18 +10,19 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+        - 8
     - name: Fedora
       versions:
-        - 23
-        - 24
-        - 25
+        - 31
+        - 32
     - name: Ubuntu
       versions:
-        - trusty
+        - bionic
         - xenial
     - name: Debian
       versions:
-        - jessie
+        - buster
+        - stretch
   role_name: gitlab_runner
   galaxy_tags:
     - gitlab
