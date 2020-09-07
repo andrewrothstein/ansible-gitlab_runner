@@ -3,7 +3,7 @@
 
 # https://docs.gitlab.com/runner/install/linux-manually.html#install-1
 
-gitlab_runner_ver: 13.3.0
+gitlab_runner_ver: 13.3.1
 
 gitlab_runner_os: linux
 gitlab_runner_arch: amd64
@@ -178,3 +178,10 @@ gitlab_runner_checksums:
     linux-386: sha256:1e6a88f45d00469481e984d90f803588a75c36e50bbce3849711c14a71d6af2d
     # https://gitlab-runner-downloads.s3.amazonaws.com/v13.3.0/binaries/gitlab-runner-linux-arm
     linux-arm: sha256:ffc1a850c2c4781e443ad0411b5ad33e39c4be15e3d75f25ee7634fd2b72b006
+  '13.3.1':
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v13.3.1/binaries/gitlab-runner-linux-amd64
+    linux-amd64: sha256:47888e898f64606f29763fa84f04717ab40d303d181333df650fbfb5cbdb6a20
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v13.3.1/binaries/gitlab-runner-linux-386
+    linux-386: sha256:4540071e36ad183d0c7578435af0a8c47e20b8ec93d457f15946907950cd94dc
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v13.3.1/binaries/gitlab-runner-linux-arm
+    linux-arm: sha256:2d2a8a0fd4639b81ee363a255dc35f1f134e181773212f5fa0f1ce8c251a45f9

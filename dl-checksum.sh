@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -e
 DIR=~/Downloads
 MIRROR=https://gitlab-runner-downloads.s3.amazonaws.com
 APP=gitlab-runner
@@ -30,4 +31,4 @@ dlver () {
     dl $ver linux arm
 }
 
-dlver ${1:-13.3.0}
+dlver ${1:-13.3.1}
