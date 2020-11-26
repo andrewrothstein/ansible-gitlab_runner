@@ -21,6 +21,13 @@ gitlab_runner_config_file: config.toml
 # process supervisor runs as...
 gitlab_runner_runas: gitlab-runner
 
+# when using the shell runner with bash, the .bash_logout script borks the CI jobs
+# by trying to clear the console
+# https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading
+# list of files in the gitlab-runner user's home directory to delete
+gitlab_runner_profile_delete:
+  - .bash_logout
+
 gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 # add the gitlab_runner_runas to the following additional groups

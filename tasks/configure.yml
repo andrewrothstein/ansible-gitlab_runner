@@ -7,6 +7,14 @@
     append: yes
     groups: '{{ gitlab_runner_addl_groups | default([]) }}'
 
+- name: deleting from {{ gitlab_runner_runas }} users home directory
+  become: yes
+  become_user: root
+  with_items: '{{ gitlab_runner_profile_delete | default([]) }}'
+  file:
+    path: /home/{{ gitlab_runner_runas }}/{{ item }}
+    state: absent
+
 - name: mkdir config and env directories
   become: yes
   become_user: root
