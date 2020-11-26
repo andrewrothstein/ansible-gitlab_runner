@@ -9,7 +9,7 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-- name: look for executable
+- name: looking for {{ gitlab_runner_lexe }}
   become: yes
   stat:
     path: '{{ gitlab_runner_lexe }}'
@@ -17,14 +17,14 @@
   register: gitlab_runner_register
 - when: not gitlab_runner_register.stat.exists
   block:
-    - name: download
+    - name: downloading {{ gitlab_runner_url }} to {{ gitlab_runner_lexe }}
       become: yes
       become_user: root
       get_url:
         url: '{{ gitlab_runner_url }}'
         dest: '{{ gitlab_runner_lexe }}'
         mode: 0755
-- name: link
+- name: linking {{ gitlab_runner_link }} to {{ gitlab_runner_lexe }}
   become: yes
   become_user: root
   file:
