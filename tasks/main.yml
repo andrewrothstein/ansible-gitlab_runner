@@ -24,6 +24,7 @@
         url: '{{ gitlab_runner_url }}'
         dest: '{{ gitlab_runner_lexe }}'
         mode: 0755
+      notify: gitlab_runner_service_restart
 - name: linking {{ gitlab_runner_link }} to {{ gitlab_runner_lexe }}
   become: yes
   become_user: root
