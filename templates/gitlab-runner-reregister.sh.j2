@@ -12,32 +12,35 @@
   --registration-token={{ gitlab_runner_reregister.registration_token }} \
   --limit={% if 'limit' in r %}{{ r.limit }}{% else %}{{ gitlab_runner_concurrent_runners_per_host | default(0) }}{% endif %} \
   --locked={% if 'locked' in r %}{{ r.locked }}{% else %}false{% endif %} \
-{% if 'env' in r %}{% for k, v in r.env.items() %}  --env {{ k }}={{ v }} \
-{% endfor %}{% endif %}
-{% if 'docker_image' in r %}  --docker-image={{ r.docker_image }} \
-{% endif -%}
-{% if 'docker_wait_for_services_timeout' in r %}  --docker-wait-for-services-timeout={{ r.docker_wait_for_services_timeout }} \
-{% endif -%}
-{% if 'docker_privileged' in r and r.docker_privileged %}  --docker-privileged \
-{% endif %}
-{% if 'docker_volumes' in r %}{% for v in r.docker_volumes %}  --docker-volumes={{ v }} \
-{% endfor %}{% endif %}
+  {% if 'env' in r %} \
+  {% for k, v in r.env.items() %}--env {{ k }}={{ v }} \
+  {% endfor %}{% endif %} \
+  {% if 'docker_image' in r %}--docker-image={{ r.docker_image }} \
+  {% endif %} \
+  {% if 'docker_wait_for_services_timeout' in r %}--docker-wait-for-services-timeout={{ r.docker_wait_for_services_timeout }} \
+  {% endif %} \
+  {% if 'docker_privileged' in r and r.docker_privileged %}--docker-privileged \
+  {% endif %} \
+  {% if 'docker_volumes' in r %} \
+  {% for v in r.docker_volumes %}--docker-volumes={{ v }} \
+  {% endfor %} \
+  {% endif %} \
   --tag-list={{ r.tags | join(",") }} \
-{% if 'cache_shared' in r %} --cache-shared \
-{% if 's3' in r.cache_shared -%}
-{% if 'server_address' in r.cache_shared.s3 %} --cache-s3-server-address={{ r.cache_shared.s3.server_address }}{% endif %} \
-{% if 'access_key' in r.cache_shared.s3 %} --cache-s3-access-key={{ r.cache_shared.s3.access_key }}{% endif %} \
-{% if 'secret_key' in r.cache_shared.s3 %} --cache-s3-secret-key={{ r.cache_shared.s3.secret_key }}{% endif %} \
-{% if 'bucket_name' in r.cache_shared.s3 %} --cache-s3-bucket-name={{ r.cache_shared.s3.bucket_name }}{% endif %} \
-{% if 'bucket_location' in r.cache_shared.s3 %} --cache-s3-bucket-location={{ r.cache_shared.s3.bucket_location }}{% endif %} \
-{% if 'insecure' in r.cache_shared.s3 and r.cache_shared.s3.insecure | bool %} --cache-s3-insecure{% endif %} \
-{% elif 'gcs' in r.cache_shared -%}
-{% if 'access_id' in r.cache_shared.gcs %} --cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
-{% if 'private_key' in r.cache_shared.gcs %} --cache-gcs-private-key={{ r.cache_shared.gcs.private_key }}{% endif %} \
-{% if 'credentials_file' in r.cache_shared.gcs %} --cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
-{% if 'bucket_name' in r.cache_shared.gcs %} --cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
-{% endif %}{% endif -%}
+  {% if 'cache_shared' in r %}--cache-shared \
+  {% if 's3' in r.cache_shared -%} \
+  {% if 'server_address' in r.cache_shared.s3 %}--cache-s3-server-address={{ r.cache_shared.s3.server_address }}{% endif %} \
+  {% if 'access_key' in r.cache_shared.s3 %}--cache-s3-access-key={{ r.cache_shared.s3.access_key }}{% endif %} \
+  {% if 'secret_key' in r.cache_shared.s3 %}--cache-s3-secret-key={{ r.cache_shared.s3.secret_key }}{% endif %} \
+  {% if 'bucket_name' in r.cache_shared.s3 %}--cache-s3-bucket-name={{ r.cache_shared.s3.bucket_name }}{% endif %} \
+  {% if 'bucket_location' in r.cache_shared.s3 %}--cache-s3-bucket-location={{ r.cache_shared.s3.bucket_location }}{% endif %} \
+  {% if 'insecure' in r.cache_shared.s3 and r.cache_shared.s3.insecure | bool %}--cache-s3-insecure{% endif %} \
+  {% elif 'gcs' in r.cache_shared %} \
+  {% if 'access_id' in r.cache_shared.gcs %}--cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
+  {% if 'private_key' in r.cache_shared.gcs %}--cache-gcs-private-key={{ r.cache_shared.gcs.private_key }}{% endif %} \
+  {% if 'credentials_file' in r.cache_shared.gcs %}--cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
+  {% if 'bucket_name' in r.cache_shared.gcs %}--cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
+  {% endif %} \
+  {% endif -%} \
   --executor={{ r.executor }}
-
 {% endfor %}
 {% endif %}
