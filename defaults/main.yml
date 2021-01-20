@@ -40,6 +40,9 @@ gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 gitlab_runner_activate: True
 
+# useful for forcing a re-registration
+gitlab_runner_force_reregister: False
+
 # the below will trigger a de-register/re-register of all runners...
 #gitlab_runner_reregister:
 #  gitlab_hostname: git.example.com
