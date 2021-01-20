@@ -27,7 +27,7 @@
   {% endif %} \
   --tag-list={{ r.tags | join(",") }} \
   {% if 'cache_shared' in r %}--cache-shared \
-  {% if 's3' in r.cache_shared -%} \
+  {% if 's3' in r.cache_shared %} \
   {% if 'server_address' in r.cache_shared.s3 %}--cache-s3-server-address={{ r.cache_shared.s3.server_address }}{% endif %} \
   {% if 'access_key' in r.cache_shared.s3 %}--cache-s3-access-key={{ r.cache_shared.s3.access_key }}{% endif %} \
   {% if 'secret_key' in r.cache_shared.s3 %}--cache-s3-secret-key={{ r.cache_shared.s3.secret_key }}{% endif %} \
@@ -40,7 +40,7 @@
   {% if 'credentials_file' in r.cache_shared.gcs %}--cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
   {% if 'bucket_name' in r.cache_shared.gcs %}--cache-gcs-access-id={{ r.cache_shared.gcs.access_id }}{% endif %} \
   {% endif %} \
-  {% endif -%} \
+  {% endif %} \
   --executor={{ r.executor }}
 {% endfor %}
 {% endif %}
