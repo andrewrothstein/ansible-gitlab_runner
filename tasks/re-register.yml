@@ -5,7 +5,7 @@
   template:
     src: gitlab-runner-reregister.sh.j2
     dest: '{{ gitlab_runner_reregister_sh }}'
-    mode: 0755
+    mode: 0700
   register: gitlab_runner_reregistration_templated
 - name: re-registering the runners
   become: yes
