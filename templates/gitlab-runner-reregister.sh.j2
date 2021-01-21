@@ -26,6 +26,7 @@
   {% endfor %} \
   {% endif %} \
   --tag-list={{ r.tags | join(",") }} \
+  {% if r.cache_type is defined %}--cache-type={{ r.cache_type }}{% endif %} \
   {% if 'cache_shared' in r %}--cache-shared \
   {% if r.cache_shared.s3 is defined %} \
   {% if 'server_address' in r.cache_shared.s3 %}--cache-s3-server-address={{ r.cache_shared.s3.server_address }}{% endif %} \
@@ -42,5 +43,6 @@
   {% endif %} \
   {% endif %} \
   --executor={{ r.executor }}
+
 {% endfor %}
 {% endif %}
