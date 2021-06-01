@@ -29,6 +29,7 @@ dlver () {
     dl $ver linux amd64
     dl $ver linux 386
     dl $ver linux arm
+    dl $ver linux arm64
 }
 
-dlver ${1:-13.11.0}
+dlver ${1:-13.12.0}
