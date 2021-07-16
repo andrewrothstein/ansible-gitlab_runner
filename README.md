@@ -1,6 +1,6 @@
-andrewrothstein.gitlab_runner
+andrewrothstein.gitlab\_runner
 ======================================
-[![Build Status](https://travis-ci.org/andrewrothstein/ansible-gitlab_runner.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-gitlab_runner)
+![Build Status](https://github.com/andrewrothstein/ansible-gitlab_runner/actions/workflows/build.yml/badge.svg)
 
 Installs and configures a [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-runner).
 
