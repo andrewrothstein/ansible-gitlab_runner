@@ -32,4 +32,4 @@ dlver () {
     dl $ver linux arm64
 }
 
-dlver ${1:-14.3.0}
+dlver ${1:-14.3.1}
