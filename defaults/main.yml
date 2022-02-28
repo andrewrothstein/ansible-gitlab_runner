@@ -38,10 +38,10 @@ gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 #gitlab_runner_check_gitlab_new_builds_interval: 0
 
-gitlab_runner_activate: True
+gitlab_runner_activate: true
 
 # useful for forcing a re-registration
-gitlab_runner_force_reregister: False
+gitlab_runner_force_reregister: false
 
 # the below will trigger a de-register/re-register of all runners...
 #gitlab_runner_reregister:
@@ -68,7 +68,7 @@ gitlab_runner_force_reregister: False
 #      executor: docker
 #      docker_image: docker:stable
 #      docker_wait_for_services_timeout: 600
-#      docker_privileged: yes
+#      docker_privileged: true
 #      docker_volumes:
 #        - /certs/client
 #        - /cache

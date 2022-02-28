@@ -1,13 +1,13 @@
 ---
 # handlers file for gitlab_runner
 - name: gitlab_runner_daemon_reload
-  become: yes
+  become: true
   become_user: root
   when: gitlab_runner_activate
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
 - name: gitlab_runner_service_restart
-  become: yes
+  become: true
   become_user: root
   when: gitlab_runner_activate
   service:

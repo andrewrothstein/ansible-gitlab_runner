@@ -1,6 +1,6 @@
 ---
 - name: templatize /etc/{conf.d,init.d}/gitlab-runner
-  become: yes
+  become: true
   become_user: root
   notify:
     - gitlab_runner_service_restart

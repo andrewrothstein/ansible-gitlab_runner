@@ -2,7 +2,7 @@
 - hosts: all
   roles:
     - role: '{{ playbook_dir }}'
-      gitlab_runner_activate: False
+      gitlab_runner_activate: false
       gitlab_runner_reregister:
         gitlab_hostname: git.example.com
         registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
@@ -21,7 +21,7 @@
             - dnd
             executor: docker
             docker_image: docker:stable
-            docker_privileged: yes
+            docker_privileged: true
             docker_volumes:
               - /certs/client
               - /cache

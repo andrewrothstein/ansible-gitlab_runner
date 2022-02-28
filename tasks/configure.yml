@@ -1,14 +1,14 @@
 ---
 - name: add the gitlab-runner user to other groups
-  become: yes
+  become: true
   become_user: root
   user:
     name: '{{ gitlab_runner_runas }}'
-    append: yes
+    append: true
     groups: '{{ gitlab_runner_addl_groups | default([]) }}'
 
 - name: deleting from {{ gitlab_runner_runas }} users home directory
-  become: yes
+  become: true
   become_user: root
   with_items: '{{ gitlab_runner_profile_delete | default([]) }}'
   file:
@@ -16,7 +16,7 @@
     state: absent
 
 - name: mkdir config and env directories
-  become: yes
+  become: true
   become_user: root
   with_items:
     - d: '{{ gitlab_runner_config_dir }}'
@@ -27,7 +27,7 @@
     mode: '{{ item.m }}'
 
 - name: templatize environment...
-  become: yes
+  become: true
   become_user: root
   notify: gitlab_runner_service_restart
   with_items:
@@ -41,7 +41,7 @@
     mode: '{{ item.m }}'
 
 - name: establish global configs in config.toml
-  become: yes
+  become: true
   become_user: root
   notify: gitlab_runner_service_restart
   with_items:
@@ -51,7 +51,7 @@
       line: 'check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}'
   lineinfile:
     path: '{{ gitlab_runner_config_dir }}/{{ gitlab_runner_config_file }}'
-    create: yes
+    create: true
     mode: '0600'
     regex: '{{ item.regex }}'
     line: '{{ item.line }}'

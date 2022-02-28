@@ -1,6 +1,6 @@
 ---
 - name: install gitlab-runner systemd service
-  become: yes
+  become: true
   become_user: root
   notify:
     - gitlab_runner_daemon_reload

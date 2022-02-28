@@ -1,6 +1,6 @@
 ---
 - name: templatize the re-registration script
-  become: yes
+  become: true
   become_user: root
   template:
     src: gitlab-runner-reregister.sh.j2
@@ -8,7 +8,7 @@
     mode: 0700
   register: gitlab_runner_reregistration_templated
 - name: re-registering the runners
-  become: yes
+  become: true
   become_user: root
   when: gitlab_runner_activate and (gitlab_runner_reregistration_templated.changed or gitlab_runner_force_reregister)
   command: '{{ gitlab_runner_reregister_sh }}'

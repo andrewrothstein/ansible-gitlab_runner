@@ -10,15 +10,15 @@
       paths:
         - '{{ role_path }}/vars'
 - name: looking for {{ gitlab_runner_lexe }}
-  become: yes
+  become: true
   stat:
     path: '{{ gitlab_runner_lexe }}'
-  changed_when: False
+  changed_when: false
   register: gitlab_runner_register
 - when: not gitlab_runner_register.stat.exists
   block:
     - name: downloading {{ gitlab_runner_url }} to {{ gitlab_runner_lexe }}
-      become: yes
+      become: true
       become_user: root
       get_url:
         url: '{{ gitlab_runner_url }}'
@@ -26,7 +26,7 @@
         mode: 0755
       notify: gitlab_runner_service_restart
 - name: linking {{ gitlab_runner_link }} to {{ gitlab_runner_lexe }}
-  become: yes
+  become: true
   become_user: root
   file:
     src: '{{ gitlab_runner_lexe }}'
@@ -40,13 +40,13 @@
   include_tasks: '{{ gitlab_runner_init | default("systemd") }}.yml'
 
 - name: start gitlab-runner
-  become: yes
+  become: true
   become_user: root
   when: gitlab_runner_activate
   service:
     name: gitlab-runner
     state: started
-    enabled: yes
+    enabled: true
 
 - name: re-registering runners
   when: gitlab_runner_reregister is defined
