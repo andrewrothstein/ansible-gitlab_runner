@@ -3,7 +3,7 @@
 
 # https://docs.gitlab.com/runner/install/linux-manually.html#install-1
 
-gitlab_runner_ver: 14.8.1
+gitlab_runner_ver: 14.9.1
 
 gitlab_runner_os: linux
 gitlab_runner_arch: amd64
@@ -377,3 +377,12 @@ gitlab_runner_checksums:
     linux-arm: sha256:4c65917ce5c0059a4edfe7137c8ab9d90e8fd58ebe47c7af605e046ceb93b7d1
     # https://gitlab-runner-downloads.s3.amazonaws.com/v14.8.1/binaries/gitlab-runner-linux-arm64
     linux-arm64: sha256:f18ee7587f49d2456cfb8c77db8c5568b82a96461b48464acef27a4021d01585
+  '14.9.1':
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v14.9.1/binaries/gitlab-runner-linux-amd64
+    linux-amd64: sha256:603b3a406d1c46a45356b87541c1c52125714ada6a10dc0cdf7d6ebeaa7c8c9f
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v14.9.1/binaries/gitlab-runner-linux-386
+    linux-386: sha256:b85f7f6cb6d62c0642bce09538c3cbd65d5842c49d069ee7ef87fc48ae281142
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v14.9.1/binaries/gitlab-runner-linux-arm
+    linux-arm: sha256:46a6e8d264dfbdac8a3da56e702a97605580d0d5162d277da6d950a447735037
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v14.9.1/binaries/gitlab-runner-linux-arm64
+    linux-arm64: sha256:9c19c3a83f972e0c1857f1190b407274351c82864bc591c261e093ff306b71f3
