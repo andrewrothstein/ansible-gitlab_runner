@@ -30,6 +30,9 @@ dlver () {
     dl $ver linux 386
     dl $ver linux arm
     dl $ver linux arm64
+    dl $ver darwin amd64
+    dl $ver darwin arm64
+    dl $ver windows amd64 .exe
 }
 
-dlver ${1:-14.10.0}
+dlver ${1:-14.10.1}
