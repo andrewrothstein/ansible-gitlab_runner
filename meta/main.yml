@@ -35,5 +35,3 @@ galaxy_info:
     - gitlab
     - ci
     - runner
-
-dependencies: []
