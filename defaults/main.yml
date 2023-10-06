@@ -3,7 +3,7 @@
 
 # https://docs.gitlab.com/runner/install/linux-manually.html#install-1
 
-gitlab_runner_ver: 16.2.0
+gitlab_runner_ver: 16.4.0
 
 gitlab_runner_arch_map:
   386: 386
@@ -743,3 +743,18 @@ gitlab_runner_checksums:
     darwin-arm64: sha256:43ab47c865e6da3ea854f142125d1e53fc2da32875d55a54c8b83ce6a73601cb
     # https://gitlab-runner-downloads.s3.amazonaws.com/v16.2.0/binaries/gitlab-runner-windows-amd64.exe
     windows-amd64: sha256:9b043e4195040f8ad45ea2da6abfc147ebb2f07da4795dd90a348c86c89ede96
+  '16.4.0':
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-linux-amd64
+    linux-amd64: sha256:dc972c0255a0d819fc0c21640d95c0bde9c07e32d031e49f1bf82d71ff5c6448
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-linux-386
+    linux-386: sha256:3db70f4eec7c11e479cf43c5fe079c4ead2df659e0ca33af7eef060f41c4ecce
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-linux-arm
+    linux-arm: sha256:5c461da409b642919be348f965ea83e043adc3a378083551d13bf1cd35fa37dd
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-linux-arm64
+    linux-arm64: sha256:aa4cd83f4fe1be22ccc8a0260e64f4331e4e025af03ef6fa8e2ecbb111dcc3f4
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-darwin-amd64
+    darwin-amd64: sha256:eb5c2c76eef7a85870cd1f1f1ffa1975528aaf1b614f2f0f8bf49ceabfb90e8a
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-darwin-arm64
+    darwin-arm64: sha256:7705cf2d3db5b9e5ddbabafbf6d376f03f178cf673d3a6f2b3826013b8cedbef
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.4.0/binaries/gitlab-runner-windows-amd64.exe
+    windows-amd64: sha256:02dbaffb0a37145473b4b39fd030117499cd5d577d794fa849ca306e05cdec8d
