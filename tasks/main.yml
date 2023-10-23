@@ -34,7 +34,7 @@
     state: link
 
 - name: configure gitlab-runner
-  include: configure.yml
+  include_tasks: configure.yml
 
 - name: configure gitlab-runner supervisor
   include_tasks: '{{ gitlab_runner_init | default("systemd") }}.yml'
@@ -50,4 +50,4 @@
 
 - name: re-registering runners
   when: gitlab_runner_reregister is defined
-  include: re-register.yml
+  include_tasks: re-register.yml
