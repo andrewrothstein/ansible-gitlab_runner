@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Testing andrewrothstein.gitlab_runner
+  hosts: all
   vars:
     gitlab_runner_activate: false
     gitlab_runner_reregister:
@@ -10,14 +11,12 @@
             - shell
           executor: shell
           limit: 1
-        - tags:
-          - docker
+        - tags: [docker]
           executor: docker
           docker_image: ruby:2.1
           env:
             SECRET_NUMBER: 42
-        - tags:
-          - dnd
+        - tags: [dnd]
           executor: docker
           docker_image: docker:stable
           docker_privileged: true
