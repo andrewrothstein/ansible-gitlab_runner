@@ -1,57 +1,57 @@
 ---
-- name: add the gitlab-runner user to other groups
+- name: Add the gitlab-runner user to other groups
   become: true
   become_user: root
-  user:
+  ansible.builtin.user:
     name: '{{ gitlab_runner_runas }}'
     append: true
     groups: '{{ gitlab_runner_addl_groups | default([]) }}'
 
-- name: deleting from {{ gitlab_runner_runas }} users home directory
+- name: Deleting from {{ gitlab_runner_runas }} users home directory
   become: true
   become_user: root
   with_items: '{{ gitlab_runner_profile_delete | default([]) }}'
-  file:
+  ansible.builtin.file:
     path: /home/{{ gitlab_runner_runas }}/{{ item }}
     state: absent
 
-- name: mkdir config and env directories
+- name: Mkdir config and env directories
   become: true
   become_user: root
   with_items:
     - d: '{{ gitlab_runner_config_dir }}'
-      m: '0600'
-  file:
+      m: '600'
+  ansible.builtin.file:
     state: directory
     path: '{{ item.d }}'
     mode: '{{ item.m }}'
 
-- name: templatize environment...
+- name: Templatize environment...
   become: true
   become_user: root
-  notify: gitlab_runner_service_restart
+  notify: Gitlab_runner_service_restart
   with_items:
     - t: gitlab-runner.env.j2
       d: '{{ gitlab_runner_config_dir }}'
       f: '{{ gitlab_runner_env_file }}'
-      m: '0644'
-  template:
+      m: '644'
+  ansible.builtin.template:
     src: '{{ item.t }}'
     dest: '{{ item.d }}/{{ item.f }}'
     mode: '{{ item.m }}'
 
-- name: establish global configs in config.toml
+- name: Establish global configs in config.toml
   become: true
   become_user: root
-  notify: gitlab_runner_service_restart
+  notify: Gitlab_runner_service_restart
   with_items:
     - regex: '^concurrent'
       line: 'concurrent = {{ gitlab_runner_concurrent_runners_per_host | default(1) }}'
     - regex: '^check_interval'
       line: 'check_interval = {{ gitlab_runner_check_gitlab_new_builds_interval | default(0) }}'
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: '{{ gitlab_runner_config_dir }}/{{ gitlab_runner_config_file }}'
     create: true
-    mode: '0600'
+    mode: '600'
     regex: '{{ item.regex }}'
     line: '{{ item.line }}'

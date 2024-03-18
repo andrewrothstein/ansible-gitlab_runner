@@ -3,7 +3,7 @@
 
 # https://docs.gitlab.com/runner/install/linux-manually.html#install-1
 
-gitlab_runner_ver: 16.9.0
+gitlab_runner_ver: 16.9.1
 
 gitlab_runner_arch_map:
   386: 386
@@ -34,12 +34,12 @@ gitlab_runner_profile_delete:
 gitlab_runner_mirror: https://gitlab-runner-downloads.s3.amazonaws.com
 
 # add the gitlab_runner_runas to the following additional groups
-#gitlab_runner_addl_groups:
-#  - docker
+# gitlab_runner_addl_groups:
+#   - docker
 
-#gitlab_runner_concurrent_runners_per_host: 1
+# gitlab_runner_concurrent_runners_per_host: 1
 
-#gitlab_runner_check_gitlab_new_builds_interval: 0
+# gitlab_runner_check_gitlab_new_builds_interval: 0
 
 gitlab_runner_activate: true
 
@@ -47,36 +47,36 @@ gitlab_runner_activate: true
 gitlab_runner_force_reregister: false
 
 # the below will trigger a de-register/re-register of all runners...
-#gitlab_runner_reregister:
-#  gitlab_hostname: git.example.com
-#  registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
-#  runners:
-#    - tags:
-#        - shell
-#      executor: shell
-#      limit: 1
-#    - tags:
-#        - docker
-#      executor: docker
-#      docker_image: ruby:2.1
-#      env:
-#        SECRET_NUMBER: 42
-#    - tags:
-#        - dnd
-#      cache_shared:
-#        server_address: s3://my-s3-gateway
-#        access_key: secret-access-key
-#        bucket_name: my-unique-bucket-name
-#        bucket_location: us-east-2
-#      executor: docker
-#      docker_image: docker:stable
-#      docker_wait_for_services_timeout: 600
-#      docker_privileged: true
-#      docker_volumes:
-#        - /certs/client
-#        - /cache
-#      env:
-#        SECRET_NUMBER: 44
+# gitlab_runner_reregister:
+#   gitlab_hostname: git.example.com
+#   registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
+#   runners:
+#     - tags:
+#         - shell
+#       executor: shell
+#       limit: 1
+#     - tags:
+#         - docker
+#       executor: docker
+#       docker_image: ruby:2.1
+#       env:
+#         SECRET_NUMBER: 42
+#     - tags:
+#         - dnd
+#       cache_shared:
+#         server_address: s3://my-s3-gateway
+#         access_key: secret-access-key
+#         bucket_name: my-unique-bucket-name
+#         bucket_location: us-east-2
+#       executor: docker
+#       docker_image: docker:stable
+#       docker_wait_for_services_timeout: 600
+#       docker_privileged: true
+#       docker_volumes:
+#         - /certs/client
+#         - /cache
+#       env:
+#         SECRET_NUMBER: 44
 
 gitlab_runner_checksums:
   '12.5.0':
@@ -848,3 +848,18 @@ gitlab_runner_checksums:
     darwin-arm64: sha256:5f485c69e7ee6711695ddf0876eb29322dd5088618474568b68b5e4a723dac55
     # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.0/binaries/gitlab-runner-windows-amd64.exe
     windows-amd64: sha256:9dbb14ec36926983a334d13162a31d142ff02b681d0bdf4c558863d27852df74
+  '16.9.1':
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-linux-amd64
+    linux-amd64: sha256:d5779ffab9aed4c5fabe4341613a47edd317d6e3fa8672e18b8c0b00165ac914
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-linux-386
+    linux-386: sha256:002ae1677f7a82c9e611b12851cb58a7afa07186e2c0d8a372f5b780de5be2b0
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-linux-arm
+    linux-arm: sha256:63b5d72731a5be6904bc8df2b13223f4cd8671e8ab0bbf6b967a869d10a3d16b
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-linux-arm64
+    linux-arm64: sha256:63a4ec22daa6f1179660a275a3b0993c192badf3ceb8909a35e982a71a3d4965
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-darwin-amd64
+    darwin-amd64: sha256:06c691931d426f4ccf75eebe131218625f369b1ca5fc169f514fff9828b52814
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-darwin-arm64
+    darwin-arm64: sha256:019292563e83638ced4e99fb7b6dfd21eebed108ea53223f0826698b698179a3
+    # https://gitlab-runner-downloads.s3.amazonaws.com/v16.9.1/binaries/gitlab-runner-windows-amd64.exe
+    windows-amd64: sha256:76e30bedb7aac913ad3d4b03c9abb95f2a8c30ff63101b9f27894a1648bba569

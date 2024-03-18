@@ -1,15 +1,15 @@
 ---
-- name: templatize the re-registration script
+- name: Templatize the re-registration script
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: gitlab-runner-reregister.sh.j2
     dest: '{{ gitlab_runner_reregister_sh }}'
-    mode: 0700
+    mode: '700'
   register: gitlab_runner_reregistration_templated
-- name: re-registering the runners
+- name: Re-registering the runners
   become: true
   become_user: root
   when: gitlab_runner_activate and (gitlab_runner_reregistration_templated.changed or gitlab_runner_force_reregister)
-  command: '{{ gitlab_runner_reregister_sh }}'
-  notify: gitlab_runner_service_restart
+  ansible.builtin.command: '{{ gitlab_runner_reregister_sh }}'
+  notify: Gitlab_runner_service_restart

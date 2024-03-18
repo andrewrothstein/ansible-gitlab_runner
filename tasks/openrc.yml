@@ -1,19 +1,19 @@
 ---
-- name: templatize /etc/{conf.d,init.d}/gitlab-runner
+- name: Templatize /etc/{conf.d,init.d}/gitlab-runner
   become: true
   become_user: root
   notify:
-    - gitlab_runner_service_restart
+    - Gitlab_runner_service_restart
   with_items:
     - d: /etc/conf.d
       f: gitlab-runner
       t: gitlab-runner-confd
-      m: '0644'
+      m: '644'
     - d: /etc/init.d
       f: gitlab-runner
       t: gitlab-runner-initd
-      m: '0644'
-  template:
+      m: '644'
+  ansible.builtin.template:
     src: '{{ item.t }}.j2'
     dest: '{{ item.d }}/{{ item.f }}'
     mode: '{{ item.m }}'

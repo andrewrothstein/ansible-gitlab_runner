@@ -1,6 +1,6 @@
 ---
-- name: resolve platform specific vars
-  include_vars: '{{ item }}'
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - files:
         - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
@@ -9,45 +9,46 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-- name: looking for {{ gitlab_runner_lexe }}
+- name: Looking for {{ gitlab_runner_lexe }}
   become: true
-  stat:
+  ansible.builtin.stat:
     path: '{{ gitlab_runner_lexe }}'
   changed_when: false
   register: gitlab_runner_register
-- when: not gitlab_runner_register.stat.exists
+- name: Downloading and installing gitlab-runner
+  when: not gitlab_runner_register.stat.exists
   block:
-    - name: downloading {{ gitlab_runner_url }} to {{ gitlab_runner_lexe }}
+    - name: Downloading {{ gitlab_runner_url }} to {{ gitlab_runner_lexe }}
       become: true
       become_user: root
-      get_url:
+      ansible.builtin.get_url:
         url: '{{ gitlab_runner_url }}'
         dest: '{{ gitlab_runner_lexe }}'
-        mode: 0755
-      notify: gitlab_runner_service_restart
-- name: linking {{ gitlab_runner_link }} to {{ gitlab_runner_lexe }}
+        mode: '755'
+      notify: Gitlab_runner_service_restart
+- name: Linking {{ gitlab_runner_link }} to {{ gitlab_runner_lexe }}
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     src: '{{ gitlab_runner_lexe }}'
     dest: '{{ gitlab_runner_link }}'
     state: link
 
-- name: configure gitlab-runner
-  include_tasks: configure.yml
+- name: Configuring gitlab-runner
+  ansible.builtin.include_tasks: configure.yml
 
-- name: configure gitlab-runner supervisor
-  include_tasks: '{{ gitlab_runner_init | default("systemd") }}.yml'
+- name: Configuring gitlab-runner process supervisor
+  ansible.builtin.include_tasks: '{{ gitlab_runner_init | default("systemd") }}.yml'
 
-- name: start gitlab-runner
+- name: Start gitlab-runner
   become: true
   become_user: root
   when: gitlab_runner_activate
-  service:
+  ansible.builtin.service:
     name: gitlab-runner
     state: started
     enabled: true
 
-- name: re-registering runners
+- name: Re-registering runners
   when: gitlab_runner_reregister is defined
-  include_tasks: re-register.yml
+  ansible.builtin.include_tasks: re-register.yml

@@ -1,29 +1,30 @@
 ---
 - hosts: all
+  vars:
+    gitlab_runner_activate: false
+    gitlab_runner_reregister:
+      gitlab_hostname: git.example.com
+      registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
+      runners:
+        - tags:
+            - shell
+          executor: shell
+          limit: 1
+        - tags:
+          - docker
+          executor: docker
+          docker_image: ruby:2.1
+          env:
+            SECRET_NUMBER: 42
+        - tags:
+          - dnd
+          executor: docker
+          docker_image: docker:stable
+          docker_privileged: true
+          docker_volumes:
+            - /certs/client
+            - /cache
+          env:
+            SECRET_NUMBER: 44
   roles:
     - role: '{{ playbook_dir }}'
-      gitlab_runner_activate: false
-      gitlab_runner_reregister:
-        gitlab_hostname: git.example.com
-        registration_token: '49045009-df28-459e-8c1e-13b31b8f7763'
-        runners:
-          - tags:
-              - shell
-            executor: shell
-            limit: 1
-          - tags:
-            - docker
-            executor: docker
-            docker_image: ruby:2.1
-            env:
-              SECRET_NUMBER: 42
-          - tags:
-            - dnd
-            executor: docker
-            docker_image: docker:stable
-            docker_privileged: true
-            docker_volumes:
-              - /certs/client
-              - /cache
-            env:
-              SECRET_NUMBER: 44

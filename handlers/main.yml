@@ -1,15 +1,15 @@
 ---
 # handlers file for gitlab_runner
-- name: gitlab_runner_daemon_reload
+- name: Gitlab_runner_daemon_reload
   become: true
   become_user: root
   when: gitlab_runner_activate
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
-- name: gitlab_runner_service_restart
+- name: Gitlab_runner_service_restart
   become: true
   become_user: root
   when: gitlab_runner_activate
-  service:
+  ansible.builtin.service:
     name: gitlab-runner
     state: restarted
