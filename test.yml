@@ -27,3 +27,11 @@
             SECRET_NUMBER: 44
   roles:
     - role: '{{ playbook_dir }}'
+  tasks:
+    - name: Executing 'gitlab-runner --version'
+      ansible.builtin.command: /usr/local/bin/gitlab-runner --version
+      changed_when: false
+      register: gitlab_runner_test_output
+    - name: Output from 'gitab-runner --version'
+      ansible.builtin.debug:
+        msg: '{{ gitlab_runner_test_output.stdout }}'
